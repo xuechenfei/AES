@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript" src="crypto-js.js"></script>
+<script type="text/javascript" src="aes.js"></script>
+<script type="text/javascript">
+function Encrypt(word){
+    var key = CryptoJS.enc.Utf8.parse("0102030405060708");
+    var iv  = CryptoJS.enc.Utf8.parse('0102030405060708');
+    var srcs = CryptoJS.enc.Utf8.parse(word);
+    var encrypted = CryptoJS.AES.encrypt(srcs, key, { iv: iv,mode:CryptoJS.mode.CBC});
+    return encrypted.toString();
+}
+function Decrypt(word){
+    var key = CryptoJS.enc.Utf8.parse("0102030405060708");
+    var iv  = CryptoJS.enc.Utf8.parse('0102030405060708');
+    var decrypt = CryptoJS.AES.decrypt(word, key, { iv: iv,mode:CryptoJS.mode.CBC});
+    return CryptoJS.enc.Utf8.stringify(decrypt).toString();
+}
+var pwd = Encrypt('hello');
+    console.log(pwd);
+
+    pwd = Decrypt(pwd);
+    console.log(pwd);
+</script>
+
+</body>
+</html>
